@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "citadel-fastfill"
+version = "1.0.0"
+description = "FastFill and SmartProvide, the two algorithmic strategies the SEC described in its 2017 order against Citadel Securities (Release No. 33-10280), rebuilt rule by rule and run on public BTC/USD order books. A simulation, not Citadel's code."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE", "NOTICE"]
+authors = [{ name = "Carm1ne6" }]
+keywords = ["market microstructure", "SEC", "order handling", "SIP", "NBBO", "toxicity", "simulation", "order book"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Science/Research",
+    "Topic :: Office/Business :: Financial :: Investment",
+]
+dependencies = [
+    "websockets>=10",
+    "numpy>=1.22",
+    "tomli>=1.1; python_version < '3.11'",   # --config on Python 3.10 (tomllib is in the standard library from 3.11)
+]
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[project.scripts]
+citadel-fastfill = "citadel.cli:main"
+
+[project.urls]
+Repository = "https://github.com/Carm1ne6/citadel-fastfill"
+"SEC order" = "https://www.sec.gov/litigation/admin/2017/33-10280.pdf"
+Patent = "https://patents.google.com/patent/US7587347B2/en"
+
+# Install from a clone with `pip install -e .`: the command runs the repository's scripts (run.py, live.py,
+# record.py, ...) and reads RULES.md, so it needs the files next to the citadel package.
+[tool.setuptools]
+packages = ["citadel"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

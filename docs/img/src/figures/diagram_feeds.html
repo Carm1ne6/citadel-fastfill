@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Two views of the market</title>
+<link rel="stylesheet" href="figures.css">
+<style>
+  body { width: 900px; height: 560px; }
+  .body { position: absolute; top: 38px; left: 0; width: 900px; height: 522px; }
+  .abs { position: absolute; }
+  svg.wires { position: absolute; left: 0; top: 0; width: 900px; height: 522px; overflow: visible; }
+
+  .box { position: absolute; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; }
+  .h { font: 650 27px/1.1 "Inter", sans-serif; color: var(--text); letter-spacing: -0.015em; white-space: nowrap; }
+  .h.mono { font: 800 28px/1 "JBM", monospace; letter-spacing: -0.02em; }
+  .h span { font-weight: 450; color: var(--text-2); font-size: 18px; letter-spacing: 0; }
+  .s { font: 400 14.5px/1.45 "JBM", monospace; color: var(--text-2); white-space: nowrap; }
+  .s b { color: var(--text); font-weight: 500; }
+
+  .ex { left: 28px; top: 64px; width: 158px; height: 236px; padding: 18px 18px; }
+  .ex svg { display: block; margin-top: 16px; }
+
+  .tag-wrap { position: absolute; transform: translate(-50%, -50%); }
+  .tag-plain, .tag-wrap .hot-tag {
+    display: inline-flex; align-items: center; justify-content: center;
+    height: 46px; padding: 0 13px; border-radius: 7px;
+    font: 800 30px "JBM", monospace; letter-spacing: -0.03em;
+  }
+  .tag-plain { border: 1.5px solid var(--border-strong); background: var(--bg); color: var(--text); }
+  .tag-wrap small { position: absolute; left: 0; bottom: 54px; white-space: nowrap; font: 600 13px "JBM", monospace; letter-spacing: 0.06em; text-transform: uppercase; }
+
+  .sip { left: 236px; top: 204px; width: 196px; height: 94px; padding: 16px 18px; }
+
+  .ces { left: 650px; top: 70px; width: 222px; height: 222px; padding: 20px 20px; }
+  .ces .sub { margin-top: 8px; font: 500 15px/1.35 "Inter", sans-serif; color: var(--text-2); }
+  .ces .rule { height: 1px; background: var(--hair); margin: 18px -20px 16px; }
+
+  .retail { left: 650px; top: 362px; width: 222px; height: 74px; padding: 12px 20px; border-style: dashed; border-color: var(--border); background: var(--bg); }
+  .retail .h { font-size: 22px; }
+
+  .quote-line { left: 28px; top: 404px; width: 560px; font-size: 18px; line-height: 1.4; }
+  .quote-line .cite { display: block; margin-top: 8px; }
+</style>
+</head>
+<body>
+<div class="win">
+  <div class="bar">
+    <div class="dots"><i></i><i></i><i></i></div>
+    <div class="title">two views of the market</div>
+  </div>
+  <div class="body">
+    <svg class="wires" viewBox="0 0 900 522">
+      <defs>
+        <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#E6E8EA"/>
+        </marker>
+        <marker id="ahg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#8A9199"/>
+        </marker>
+      </defs>
+      <!-- direct feeds: straight and bright -->
+      <line x1="187" y1="124" x2="646" y2="124" stroke="#E6E8EA" stroke-width="3" marker-end="url(#ah)"/>
+      <!-- SIP: through the consolidator, dim and dashed -->
+      <line x1="187" y1="251" x2="234" y2="251" stroke="#8A9199" stroke-width="2" stroke-dasharray="5 6"/>
+      <line x1="433" y1="251" x2="646" y2="251" stroke="#8A9199" stroke-width="2" stroke-dasharray="5 6" marker-end="url(#ahg)"/>
+      <!-- retail order up into CES -->
+      <line x1="761" y1="360" x2="761" y2="298" stroke="#A3A9B0" stroke-width="2" marker-end="url(#ahg)"/>
+    </svg>
+
+    <div class="abs caps" style="left:28px; top:22px;">Same moment, two prices</div>
+    <div class="abs cite" style="right:28px; top:22px;">SEC order ¶4-7, 19-25 · prices: ¶11</div>
+
+    <div class="box ex">
+      <div class="h" style="font-size:24px">Exchanges</div>
+      <svg width="118" height="150" viewBox="0 0 118 150">
+        <!-- three order books: bids left of centre, asks right -->
+        <g fill="#454C56">
+          <rect x="0" y="0" width="118" height="42" rx="6" fill="#0B0E11" stroke="#2C333C"/>
+          <rect x="22" y="9" width="34" height="5" rx="1"/><rect x="62" y="9" width="24" height="5" rx="1"/>
+          <rect x="12" y="18" width="44" height="5" rx="1"/><rect x="62" y="18" width="40" height="5" rx="1"/>
+          <rect x="30" y="27" width="26" height="5" rx="1"/><rect x="62" y="27" width="30" height="5" rx="1"/>
+          <rect x="0" y="54" width="118" height="42" rx="6" fill="#0B0E11" stroke="#2C333C"/>
+          <rect x="16" y="63" width="40" height="5" rx="1"/><rect x="62" y="63" width="36" height="5" rx="1"/>
+          <rect x="28" y="72" width="28" height="5" rx="1"/><rect x="62" y="72" width="20" height="5" rx="1"/>
+          <rect x="10" y="81" width="46" height="5" rx="1"/><rect x="62" y="81" width="42" height="5" rx="1"/>
+          <rect x="0" y="108" width="118" height="42" rx="6" fill="#0B0E11" stroke="#2C333C"/>
+          <rect x="26" y="117" width="30" height="5" rx="1"/><rect x="62" y="117" width="44" height="5" rx="1"/>
+          <rect x="14" y="126" width="42" height="5" rx="1"/><rect x="62" y="126" width="28" height="5" rx="1"/>
+          <rect x="34" y="135" width="22" height="5" rx="1"/><rect x="62" y="135" width="34" height="5" rx="1"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="abs" style="left:208px; top:62px;">
+      <div class="h">Direct feeds</div>
+      <div class="s" style="margin-top:6px">displayed orders, <b>odd lots too</b></div>
+    </div>
+    <div class="abs s" style="left:208px; top:140px;"><b>received sooner</b> · ¶7, 22</div>
+
+    <div class="box sip">
+      <div class="h">SIP <span>public</span></div>
+      <div class="s" style="margin-top:8px"><b>round lots only</b></div>
+    </div>
+    <div class="abs s" style="left:236px; top:310px; font-size:14px;"><b>4.04 ms</b> NYSE · <b>5.42 ms</b> Nasdaq<br><span style="color:var(--muted)">average SIP consolidation, early 2010 · fn 9</span></div>
+
+    <div class="tag-wrap" style="left:556px; top:124px;">
+      <small style="color:var(--hot)">best offer</small>
+      <span class="hot-tag">$10.00</span>
+    </div>
+    <div class="tag-wrap" style="left:556px; top:251px;">
+      <small style="color:var(--text-2)">NBO</small>
+      <span class="tag-plain">$10.01</span>
+    </div>
+
+    <div class="abs s" style="left:556px; top:160px; transform:translateX(-50%); font-size:13px; color:var(--text-2)">FastFill fires · ¶10</div>
+
+    <div class="box ces">
+      <div class="h mono">CES</div>
+      <div class="sub">Citadel Execution Services, sees both</div>
+      <div class="rule"></div>
+      <div class="s"><b>internalize</b></div>
+      <div class="s"><b>or route</b> · ¶26</div>
+    </div>
+
+    <div class="box retail">
+      <div class="h">Retail order</div>
+      <div class="s" style="font-size:13.5px; margin-top:5px">marketable · ¶1</div>
+    </div>
+
+    <div class="abs quote quote-line">“the market data in the depth of book feeds is received sooner by market participants and includes odd lots”<span class="cite">SEC order 33-10280, ¶7</span></div>
+  </div>
+</div>
+</body>
+</html>

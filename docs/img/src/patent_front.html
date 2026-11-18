@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>US 7,587,347 B2, front page</title>
+<link rel="stylesheet" href="doc.css">
+<script src="pages/sec_words.js"></script>
+<script src="patent_marks.js"></script>
+<script src="doc.js"></script>
+</head>
+<body>
+<div id="fig"></div>
+<script>
+// US 7,587,347 B2, front page (pages/patent_front.png, the top of page 1 of
+// docs/patents/US7587347.pdf): the title, Kenneth C. Griffin, Citadel Investment Group.
+renderFigure({
+  sheetWidth: 1472,
+  sheets: [{
+    src: 'pages/patent_front.png',
+    natural: [1600, 1278],
+    marks: window.PATENT_MARKS,
+    boxes: [window.PATENT_BOX],
+  }],
+  caption: [
+    '<b>US 7,587,347 B2</b><span class="sep">·</span>front page',
+    'United States Patent, September 8, 2009<span class="sep">·</span>filed November 30, 2004',
+  ],
+});
+</script>
+</body>
+</html>

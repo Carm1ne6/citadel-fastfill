@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SEC order, title page</title>
+<link rel="stylesheet" href="doc.css">
+<script src="pages/sec_words.js"></script>
+<script src="doc.js"></script>
+</head>
+<body>
+<div id="fig"></div>
+<script>
+// SEC order 33-10280, page 1: the title block. The black frame around "In the Matter of" is the
+// order's own; the red box is ours.
+renderFigure({
+  sheetWidth: 1472,
+  sheets: [{
+    page: 1,
+    clip: [0, 84, 612, 434],
+    marks: [
+      'Release No. 10280 / January 13, 2017',
+      'Release No. 79790 / January 13, 2017',
+      'File No. 3-17772',
+      'Citadel Securities LLC',
+    ],
+    boxes: [{ p: 'Citadel Securities LLC', padx: 2.5, pady: 1.5 }],
+  }],
+  caption: [
+    '<b>Title page</b><span class="sep">·</span>page 1',
+    'SEC order 33-10280, January 13, 2017<span class="sep">·</span>sec.gov/litigation/admin/2017/33-10280.pdf',
+  ],
+});
+</script>
+</body>
+</html>

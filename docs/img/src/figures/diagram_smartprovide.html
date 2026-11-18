@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SmartProvide</title>
+<link rel="stylesheet" href="figures.css">
+<style>
+  body { width: 900px; height: 728px; }
+  .body { position: absolute; top: 38px; left: 0; width: 900px; height: 690px; }
+  .abs { position: absolute; }
+  svg.wires { position: absolute; left: 0; top: 0; width: 900px; height: 690px; overflow: visible; }
+
+  /* price ladder: a buy order, offers on the feeds, the order SmartProvide displays */
+  .ladder { position: absolute; left: 28px; top: 62px; width: 452px; height: 406px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .lhead { position: absolute; left: 0; right: 0; top: 0; height: 46px; border-bottom: 1px solid var(--hair); }
+  .lhead span { position: absolute; top: 16px; font: 600 12.5px "JBM", monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-align: center; white-space: nowrap; }
+  .lrow { position: absolute; left: 0; right: 0; height: 90px; border-bottom: 1px solid #1B2027; }
+  .lrow.last { border-bottom: 0; }
+  .lrow .p { position: absolute; left: 20px; top: 0; font: 500 17px/90px "JBM", monospace; color: var(--muted); }
+  .col-d { left: 122px; width: 100px; }
+  .col-s { left: 226px; width: 100px; }
+  .col-y { left: 334px; width: 102px; }
+  .tag { position: absolute; top: 23px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 7px; font: 800 22px "JBM", monospace; letter-spacing: -0.03em; }
+  .tag.hot { background: var(--hot); color: var(--hot-ink); }
+  .tag.plain { border: 1.5px solid var(--border-strong); color: var(--text); background: var(--bg); }
+  .tag.posted { border: 1.5px dashed #A3A9B0; color: var(--text); background: var(--bg); }
+  .timer { position: absolute; top: 70px; font: 500 11.5px "JBM", monospace; color: var(--text-2); text-align: center; }
+
+  /* steps */
+  .step { position: absolute; left: 508px; width: 364px; }
+  .step .k { font: 600 12.5px/16px "JBM", monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .step .t { margin-top: 7px; font: 650 22px/26px "Inter", sans-serif; color: var(--text); letter-spacing: -0.012em; white-space: nowrap; }
+  .step .t .px { font-family: "JBM", monospace; font-weight: 800; letter-spacing: -0.03em; }
+  .step .d { margin-top: 7px; font: 400 13.5px/1.45 "JBM", monospace; color: var(--text-2); white-space: nowrap; }
+
+  /* numbers from the order */
+  .stats { position: absolute; left: 28px; right: 28px; top: 492px; display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
+  .stat { padding: 14px 20px 16px; border-left: 1px solid var(--hair); }
+  .stat:first-child { border-left: 0; }
+  .stat .v { display: flex; justify-content: space-between; align-items: baseline; font: 800 25px/1 "JBM", monospace; color: var(--text); letter-spacing: -0.02em; }
+  .stat .v i { font: 400 12.5px "JBM", monospace; font-style: normal; color: var(--muted); letter-spacing: 0; }
+  .stat .l { margin-top: 9px; font: 400 12.5px/1.45 "JBM", monospace; color: var(--text-2); }
+  .stat .l i { font-style: normal; color: var(--muted); }
+  .bar18 { margin-top: 10px; height: 6px; border-radius: 3px; background: #2C333C; overflow: hidden; }
+  .bar18 i { display: block; width: 18%; height: 100%; background: #E6E8EA; }
+
+  .quote-line { left: 28px; top: 618px; width: 844px; font-size: 18px; line-height: 1.4; }
+  .quote-line .cite { margin-left: 10px; }
+</style>
+</head>
+<body>
+<div class="win">
+  <div class="bar">
+    <div class="dots"><i></i><i></i><i></i></div>
+    <div class="title">SmartProvide</div>
+  </div>
+  <div class="body">
+    <div class="abs caps" style="left:28px; top:22px;">SmartProvide · a buy order</div>
+    <div class="abs cite" style="right:28px; top:22px;">SEC order ¶12-13, 33-39</div>
+
+    <div class="ladder">
+      <div class="lhead"><span style="left:20px">price</span><span class="col-d">direct</span><span class="col-s">SIP</span><span class="col-y">your buy</span></div>
+      <div class="lrow" style="top:46px"><span class="p">$10.02</span><div class="tag plain col-d">$10.02</div></div>
+      <div class="lrow" style="top:136px"><span class="p">$10.01</span><div class="tag hot col-s">$10.01</div></div>
+      <div class="lrow" style="top:226px"><span class="p">$10.00</span><div class="tag posted col-y">$10.00</div><div class="timer col-y">up to 1 to 5 s</div></div>
+      <div class="lrow last" style="top:316px"><span class="p">$9.99</span></div>
+    </div>
+
+    <svg class="wires" viewBox="0 0 900 690">
+      <defs>
+        <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#E6E8EA"/>
+        </marker>
+        <marker id="ahg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#8A9199"/>
+        </marker>
+      </defs>
+      <!-- 2: the SIP price, not taken at once -->
+      <path d="M 498 243 L 360 243" stroke="#8A9199" stroke-width="2" stroke-dasharray="5 5" fill="none" marker-end="url(#ahg)"/>
+      <!-- 3: the order it displays instead -->
+      <path d="M 498 333 L 470 333" stroke="#E6E8EA" stroke-width="2.5" fill="none" marker-end="url(#ah)"/>
+      <!-- 1 cent below the SIP offer -->
+      <path d="M 114 243 L 122 243 L 122 333 L 114 333" stroke="#5E646E" stroke-width="1.5" fill="none"/>
+      <text x="129" y="293" font-family="JBM" font-size="14" font-weight="700" fill="#A3A9B0">1¢</text>
+    </svg>
+
+    <div class="step" style="top:62px">
+      <div class="k">1 · Trigger</div>
+      <div class="t">SIP better than its direct feed</div>
+      <div class="d">often one feed referenced · ¶12, 34-35</div>
+    </div>
+    <div class="step" style="top:207px">
+      <div class="k">2 · Skips the SIP price</div>
+      <div class="t">Not filled at <span class="px">$10.01</span> at once</div>
+      <div class="d">not internalized or routed at it · ¶12, 36</div>
+    </div>
+    <div class="step" style="top:297px">
+      <div class="k">3 · Displays instead</div>
+      <div class="t">Your buy shown at <span class="px">$10.00</span></div>
+      <div class="d">for up to 1 to 5 s, by size · ¶13, 36-38</div>
+    </div>
+    <div class="step" style="top:387px">
+      <div class="k">4 · After the window</div>
+      <div class="t">Unfilled shares re-handled</div>
+      <div class="d">some worse than an immediate fill · ¶39</div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="v">~690,000<i>¶33</i></div><div class="l">marketable orders, Jun 2008 to Jan 2010</div></div>
+      <div class="stat"><div class="v">~18%<i>¶37</i></div><div class="l">of shares filled in the market</div><div class="bar18"><i></i></div></div>
+      <div class="stat"><div class="v">~490,000<i>¶33</i></div><div class="l">of them internalized afterwards</div></div>
+    </div>
+
+    <div class="abs quote quote-line">“SmartProvide did not internalize at the SIP price, nor did it seek to obtain an execution at that price by sending an order to the market.”<span class="cite">¶12</span></div>
+  </div>
+</div>
+</body>
+</html>

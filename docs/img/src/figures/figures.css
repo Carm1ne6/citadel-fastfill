@@ -1,0 +1,83 @@
+/* Shared look for the README figures: dark terminal window, one hot colour. */
+@font-face { font-family: "Inter"; src: url("fonts/Inter-var.woff2") format("woff2"); font-weight: 100 900; font-display: block; }
+@font-face { font-family: "JBM"; src: url("fonts/JetBrainsMono-400.woff2") format("woff2"); font-weight: 400; font-display: block; }
+@font-face { font-family: "JBM"; src: url("fonts/JetBrainsMono-500.woff2") format("woff2"); font-weight: 500; font-display: block; }
+@font-face { font-family: "JBM"; src: url("fonts/JetBrainsMono-700.woff2") format("woff2"); font-weight: 700; font-display: block; }
+@font-face { font-family: "JBM"; src: url("fonts/JetBrainsMono-800.woff2") format("woff2"); font-weight: 800; font-display: block; }
+
+:root {
+  --bg: #0B0E11;
+  --panel: #12161C;
+  --panel-2: #161B22;
+  --bar: #1A1F26;
+  --hair: #232931;
+  --line: #2C333C;
+  --border: #3A414B;
+  --border-strong: #5E646E;
+  --text: #E6E8EA;
+  --text-2: #A3A9B0;
+  --muted: #7A818A;
+  --dim: #5A616A;
+  --hot: #FF7A1A;
+  --hot-ink: #120A04;
+  --serif: "Times New Roman", Tinos, "Liberation Serif", Times, serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { background: transparent; }
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+  overflow: hidden;
+}
+.mono { font-family: "JBM", ui-monospace, monospace; }
+.num { font-family: "JBM", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+
+/* window chrome */
+.win {
+  position: absolute; inset: 0;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.bar {
+  position: relative;
+  height: 38px;
+  background: var(--bar);
+  border-bottom: 1px solid var(--hair);
+  display: flex; align-items: center;
+}
+.dots { display: flex; gap: 8px; margin-left: 16px; }
+.dots i { display: block; width: 12px; height: 12px; border-radius: 50%; }
+.dots i:nth-child(1) { background: #FF5F57; }
+.dots i:nth-child(2) { background: #FEBC2E; }
+.dots i:nth-child(3) { background: #28C840; }
+.bar .title {
+  position: absolute; left: 0; right: 0; text-align: center;
+  font: 500 13px "JBM", monospace; color: #8B929A; letter-spacing: 0.01em;
+}
+.bar .title b { color: #C9CED4; font-weight: 500; }
+.bar .src {
+  position: absolute; right: 18px;
+  font: 400 12.5px "JBM", monospace; color: var(--muted);
+}
+
+/* bits */
+.caps { font: 600 12.5px "JBM", monospace; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.cite { font: 400 13px "JBM", monospace; color: var(--muted); white-space: nowrap; }
+.chip {
+  display: inline-flex; align-items: center; gap: 9px;
+  height: 34px; padding: 0 14px 0 11px;
+  border: 1px solid var(--border); border-radius: 8px; background: var(--panel);
+  font: 500 14.5px "JBM", monospace; color: var(--text); white-space: nowrap;
+}
+.chip svg { width: 15px; height: 15px; flex: none; }
+.hot-tag {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--hot); color: var(--hot-ink);
+  font-family: "JBM", monospace; font-weight: 800; border-radius: 6px;
+}
+.quote { font-family: var(--serif); color: #C4C9CF; }

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SEC order, paragraph 28</title>
+<link rel="stylesheet" href="doc.css">
+<script src="pages/sec_words.js"></script>
+<script src="doc.js"></script>
+</head>
+<body>
+<div id="fig"></div>
+<script>
+// SEC order 33-10280, page 8, heading D and paragraph 28: how many orders FastFill executed.
+renderFigure({
+  sheetWidth: 1472,
+  sheets: [{
+    page: 8,
+    clip: [0, 91, 612, 181],
+    marks: [
+      'FastFill executed approximately 2.7 million retail orders between June 2008 and January 2010, which amounted to approximately 0.4% of CES’s overall order flow during that period.',
+    ],
+    boxes: [{ p: 'approximately 2.7 million retail orders' }],
+  }],
+  caption: [
+    '<b>¶ 28</b><span class="sep">·</span>page 8',
+    'SEC order 33-10280, January 13, 2017<span class="sep">·</span>sec.gov/litigation/admin/2017/33-10280.pdf',
+  ],
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SEC order, Section V</title>
+<link rel="stylesheet" href="doc.css">
+<script src="pages/sec_words.js"></script>
+<script src="doc.js"></script>
+</head>
+<body>
+<div id="fig"></div>
+<script>
+// SEC order 33-10280, page 11: paragraph 42 (end of Section IV, Violations) and Section V, the
+// sanctions. The money is in Section V, item C: $5,200,000 + $1,465,268 + $16,000,000 = $22,665,268.
+renderFigure({
+  sheetWidth: 1472,
+  sheets: [{
+    page: 11,
+    clip: [0, 131.5, 612, 478],
+    marks: [
+      'pay disgorgement of $5,200,000, prejudgment interest of $1,465,268, and a civil money penalty of $16,000,000',
+    ],
+    boxes: [{ p: '$5,200,000,' }, { p: '$1,465,268,' }, { p: '$16,000,000' }],
+  }],
+  caption: [
+    '<b>Section V, item C</b><span class="sep">·</span>page 11',
+    'SEC order 33-10280, January 13, 2017<span class="sep">·</span>sec.gov/litigation/admin/2017/33-10280.pdf',
+  ],
+});
+</script>
+</body>
+</html>

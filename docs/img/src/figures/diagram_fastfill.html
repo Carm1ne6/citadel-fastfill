@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>FastFill</title>
+<link rel="stylesheet" href="figures.css">
+<style>
+  body { width: 900px; height: 728px; }
+  .body { position: absolute; top: 38px; left: 0; width: 900px; height: 690px; }
+  .abs { position: absolute; }
+  svg.wires { position: absolute; left: 0; top: 0; width: 900px; height: 690px; overflow: visible; }
+
+  /* price ladder: offers, a buy order */
+  .ladder { position: absolute; left: 28px; top: 62px; width: 404px; height: 406px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .lhead { position: absolute; left: 0; right: 0; top: 0; height: 46px; border-bottom: 1px solid var(--hair); }
+  .lhead span { position: absolute; top: 16px; font: 600 12.5px "JBM", monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-align: center; }
+  .lrow { position: absolute; left: 0; right: 0; height: 90px; border-bottom: 1px solid #1B2027; }
+  .lrow.last { border-bottom: 0; }
+  .lrow .p { position: absolute; left: 20px; top: 0; font: 500 17px/90px "JBM", monospace; color: var(--muted); }
+  .col-d { left: 148px; width: 118px; }
+  .col-s { left: 272px; width: 118px; }
+  .tag { position: absolute; top: 23px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 7px; font: 800 24px "JBM", monospace; letter-spacing: -0.03em; }
+  .tag.hot { background: var(--hot); color: var(--hot-ink); }
+  .tag.plain { border: 1.5px solid var(--border-strong); color: var(--text); background: var(--bg); }
+
+  /* steps */
+  .step { position: absolute; left: 474px; width: 398px; }
+  .step .k { font: 600 12.5px/16px "JBM", monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .step .t { margin-top: 7px; font: 650 22px/26px "Inter", sans-serif; color: var(--text); letter-spacing: -0.012em; text-wrap: balance; }
+  .step .t .px { font-family: "JBM", monospace; font-weight: 800; letter-spacing: -0.02em; }
+  .step .d { margin-top: 7px; font: 400 13.5px/1.45 "JBM", monospace; color: var(--text-2); }
+
+  /* numbers from the order */
+  .stats { position: absolute; left: 28px; right: 28px; top: 492px; display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
+  .stat { padding: 14px 18px 15px; border-left: 1px solid var(--hair); }
+  .stat:first-child { border-left: 0; }
+  .stat .v { display: flex; justify-content: space-between; align-items: baseline; font: 800 25px/1 "JBM", monospace; color: var(--text); letter-spacing: -0.02em; }
+  .stat .v i { font: 400 12.5px "JBM", monospace; font-style: normal; color: var(--muted); letter-spacing: 0; }
+  .stat .l { margin-top: 9px; font: 400 12.5px/1.45 "JBM", monospace; color: var(--text-2); }
+  .stat .l i { font-style: normal; color: var(--muted); }
+
+  .quote-line { left: 28px; top: 618px; width: 844px; font-size: 18px; line-height: 1.4; }
+  .quote-line .cite { margin-left: 10px; }
+</style>
+</head>
+<body>
+<div class="win">
+  <div class="bar">
+    <div class="dots"><i></i><i></i><i></i></div>
+    <div class="title">FastFill</div>
+  </div>
+  <div class="body">
+    <div class="abs caps" style="left:28px; top:22px;">FastFill · a buy order · best offers</div>
+    <div class="abs cite" style="right:28px; top:22px;">SEC order ¶10-11, 28-32 · fn 13</div>
+
+    <div class="ladder">
+      <div class="lhead"><span style="left:20px">price</span><span class="col-d">direct</span><span class="col-s">SIP</span></div>
+      <div class="lrow" style="top:46px"><span class="p">$10.02</span></div>
+      <div class="lrow" style="top:136px"><span class="p">$10.01</span><div class="tag plain col-s">$10.01</div></div>
+      <div class="lrow" style="top:226px"><span class="p">$10.00</span><div class="tag hot col-d">$10.00</div></div>
+      <div class="lrow last" style="top:316px"><span class="p">$9.99</span></div>
+    </div>
+
+    <svg class="wires" viewBox="0 0 900 690">
+      <defs>
+        <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#E6E8EA"/>
+        </marker>
+        <marker id="ahg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#8A9199"/>
+        </marker>
+      </defs>
+      <!-- 2: the whole order filled at the SIP price -->
+      <path d="M 464 243 L 422 243" stroke="#E6E8EA" stroke-width="2.5" fill="none" marker-end="url(#ah)"/>
+      <!-- 3: CES's own order at the better price -->
+      <path d="M 464 333 L 298 333" stroke="#8A9199" stroke-width="2" stroke-dasharray="5 5" fill="none" marker-end="url(#ahg)"/>
+      <!-- the 1 cent between the two views -->
+      <path d="M 114 243 L 122 243 L 122 333 L 114 333" stroke="#5E646E" stroke-width="1.5" fill="none"/>
+      <text x="129" y="293" font-family="JBM" font-size="14" font-weight="700" fill="#A3A9B0">1¢</text>
+    </svg>
+
+    <div class="step" style="top:62px">
+      <div class="k">1 · Trigger</div>
+      <div class="t">Direct feeds show a better price than the SIP</div>
+      <div class="d">¶10, 29</div>
+    </div>
+    <div class="step" style="top:207px">
+      <div class="k">2 · Fill</div>
+      <div class="t">The whole order at <span class="px">$10.01</span></div>
+      <div class="d">SIP price, often a small improvement · ¶30, 32</div>
+    </div>
+    <div class="step" style="top:297px">
+      <div class="k">3 · Sometimes: trade-out</div>
+      <div class="t">CES&#8217;s own buy, below the SIP</div>
+      <div class="d">up to 90% of displayed size · ¶31, fn 13</div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="v">~2.7M<i>¶28</i></div><div class="l">retail orders, Jun 2008 to Jan 2010</div></div>
+      <div class="stat"><div class="v">~0.4%<i>¶28</i></div><div class="l">of all CES order flow in that period</div></div>
+      <div class="stat"><div class="v">~20%<i>¶29</i></div><div class="l">of FastFill orders had an odd-lot trigger</div></div>
+      <div class="stat"><div class="v">~55%<i>fn 13</i></div><div class="l">of trade-outs filled, fully or in part</div></div>
+    </div>
+
+    <div class="abs quote quote-line">“FastFill did not internalize at or seek to obtain through routing the better $10.00 price from the depth of book feeds.”<span class="cite">¶11</span></div>
+  </div>
+</div>
+</body>
+</html>

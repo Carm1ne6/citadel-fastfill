@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SEC order, paragraphs 36-38</title>
+<link rel="stylesheet" href="doc.css">
+<script src="pages/sec_words.js"></script>
+<script src="doc.js"></script>
+</head>
+<body>
+<div id="fig"></div>
+<script>
+// SEC order 33-10280, pages 9-10, paragraphs 36-38: SmartProvide.
+// Paragraph 37's first sentence runs over the page break ("... to be displayed in the" | "market
+// at $10.00."), so both pages are shown and both parts are marked.
+renderFigure({
+  sheetWidth: 1472,
+  sheets: [{
+    page: 9,
+    clip: [0, 547, 612, 762],
+    marks: [
+      'For example, if SmartProvide was triggered to handle a marketable order to buy when the SIP NBO was $10.01, and the best offer from one or more of the depth of book feeds that SmartProvide referenced was $10.02, the strategy could route a buy order to be displayed in the',
+    ],
+  }, {
+    page: 10,
+    clip: [0, 86, 612, 260],
+    marks: [
+      'market at $10.00.',
+      'approximately 18% of the shares handled by SmartProvide were filled in the market',
+      'The order would be displayed for up to one to five seconds (depending on the size of the order)',
+    ],
+    boxes: [{ p: 'approximately 18%' }, { p: 'one to five seconds' }],
+  }],
+  caption: [
+    '<b>¶ 36–38</b><span class="sep">·</span>pages 9–10',
+    'SEC order 33-10280, January 13, 2017<span class="sep">·</span>sec.gov/litigation/admin/2017/33-10280.pdf',
+  ],
+});
+</script>
+</body>
+</html>

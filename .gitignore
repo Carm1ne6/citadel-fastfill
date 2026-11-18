@@ -1,0 +1,23 @@
+# recordings and run outputs stay local (re-create them with citadel-fastfill record / replay)
+data/
+out/
+
+# scratch work
+scratch*/
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+*.egg-info/
+build/
+dist/
+
+# figure build: pages rebuilt exactly from the SEC order PDF by docs/img/src/build_pages.py
+docs/img/src/pages/sec_p*.svg
+docs/img/src/pages/sec_words.js
+node_modules/
+
+# temporary files
+*.tmp

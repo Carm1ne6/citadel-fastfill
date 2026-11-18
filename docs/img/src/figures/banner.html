@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>citadel-fastfill banner</title>
+<link rel="stylesheet" href="figures.css">
+<style>
+  body { width: 1280px; height: 400px; }
+  .body { position: absolute; top: 38px; left: 0; right: 0; bottom: 0; }
+
+  .left { position: absolute; left: 60px; top: 50%; transform: translateY(-50%); width: 640px; }
+  .name {
+    font: 700 54px/1 "JBM", monospace; letter-spacing: -0.035em; color: #F2F4F6;
+  }
+  .line {
+    margin-top: 20px;
+    font: 450 21px/1.48 "Inter", sans-serif; color: var(--text-2); letter-spacing: -0.003em;
+  }
+  .line b { font-weight: 550; color: var(--text); }
+  .chips { margin-top: 30px; display: flex; gap: 12px; }
+
+  .ticket {
+    position: absolute; right: 52px; top: 50%; transform: translateY(-50%);
+    width: 456px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+  }
+  .t-head, .t-foot {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 20px; height: 42px;
+  }
+  .t-head { border-bottom: 1px solid var(--hair); }
+  .t-foot { border-top: 1px solid var(--hair); height: 44px; }
+  .t-foot span { font: 400 13px "JBM", monospace; color: var(--text-2); }
+  .t-foot span b { color: var(--text); font-weight: 500; }
+  .row {
+    display: grid; grid-template-columns: 1fr auto; align-items: center;
+    padding: 0 20px; height: 82px;
+  }
+  .row + .row { border-top: 1px dashed #262c34; }
+  .who { font: 600 19px "Inter", sans-serif; color: var(--text); letter-spacing: -0.005em; }
+  .who small { display: block; margin-top: 5px; font: 400 13px "JBM", monospace; color: var(--muted); letter-spacing: 0; }
+  .px { text-align: right; }
+  .px .hot-tag { font-size: 30px; height: 46px; padding: 0 13px; letter-spacing: -0.02em; }
+  .px .plain { font: 700 30px/46px "JBM", monospace; color: #EDEFF1; letter-spacing: -0.02em; padding-right: 13px; }
+  .px small { display: block; margin-top: 4px; font: 500 12.5px "JBM", monospace; color: var(--text-2); }
+  .px small.hot { color: var(--hot); }
+</style>
+</head>
+<body>
+<div class="win">
+  <div class="bar">
+    <div class="dots"><i></i><i></i><i></i></div>
+    <div class="title">~/<b>citadel-fastfill</b></div>
+  </div>
+  <div class="body">
+    <div class="left">
+      <div class="name">citadel-fastfill</div>
+      <div class="line">Citadel Securities' <b>FastFill &amp; SmartProvide</b>: the algorithmic strategies behind the SEC's <b>$22.6M</b> order, rebuilt rule by rule</div>
+    <div class="chips">
+      <span class="chip"><svg viewBox="0 0 16 16" fill="none" stroke="#A3A9B0" stroke-width="1.3"><path d="M3.5 1.5h6l3 3v10h-9z"/><path d="M9.5 1.5v3h3M5.5 8h5M5.5 10.5h5M5.5 13h3"/></svg>SEC Release 33-10280</span>
+      <span class="chip"><svg viewBox="0 0 16 16" fill="none" stroke="#A3A9B0" stroke-width="1.3"><path d="M3.5 1.5h6l3 3v10h-9z"/><path d="M9.5 1.5v3h3M5.5 8h5M5.5 10.5h5M5.5 13h3"/></svg>US Patent 7,587,347 (Griffin et al.)</span>
+    </div>
+    </div>
+
+    <div class="ticket">
+      <div class="t-head"><span class="caps">Buy · marketable retail order</span><span class="cite">SEC order ¶11</span></div>
+      <div class="row">
+        <div class="who">Direct feeds<small>depth of book · received sooner</small></div>
+        <div class="px"><span class="hot-tag">$10.00</span><small class="hot">best offer</small></div>
+      </div>
+      <div class="row">
+        <div class="who">SIP<small>public NBBO · round lots only</small></div>
+        <div class="px"><span class="plain">$10.01</span><small>FastFill filled here</small></div>
+      </div>
+      <div class="t-foot"><span><b>FastFill</b> · about 2.7M retail orders, 2008 to 2010</span><span class="cite">¶28</span></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

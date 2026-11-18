@@ -1,0 +1,18 @@
+citadel-fastfill
+Copyright (c) 2026 Carm1ne6. The code is under the MIT License (LICENSE).
+
+docs/ holds US government public records (the SEC order) and USPTO patent documents; the MIT License does not cover them:
+- docs/sec_order_2017_33-10280.pdf and docs/sec_order_2017_33-10280.txt: In the Matter of Citadel Securities LLC,
+  Securities Act Release No. 10280, January 13, 2017, an order of the US Securities and Exchange Commission
+  (https://www.sec.gov/litigation/admin/2017/33-10280.pdf).
+- docs/patents/: US 7,587,347 B2 and US 7,987,128 B2 as published by the United States Patent and Trademark Office.
+- docs/img/sec_*.png, docs/img/patent_front.png and docs/img/sec_collage.png: figures that show pages and excerpts of
+  those documents (the page images they are built from are in docs/img/src/pages/ and docs/img/src/figures/assets/;
+  docs/img/social_preview.png also shows crops of the SEC order). The other figures in docs/img/ are this project's
+  own (MIT).
+
+docs/img/src/figures/fonts/ holds the Inter and JetBrains Mono fonts under the SIL Open Font License 1.1 (OFL.txt in
+that folder).
+
+This project rebuilds, from those public documents, rules that the SEC order describes. It is not Citadel's code and
+is not affiliated with Citadel Securities LLC or Citadel Investment Group.

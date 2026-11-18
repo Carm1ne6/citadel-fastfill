@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SEC order, paragraphs 12-13</title>
+<link rel="stylesheet" href="doc.css">
+<script src="pages/sec_words.js"></script>
+<script src="doc.js"></script>
+</head>
+<body>
+<div id="fig"></div>
+<script>
+// SEC order 33-10280, page 4, paragraphs 12-13: SmartProvide, the short version on one page
+// (the same $10.01 / $10.02 / $10.00 example, one to five seconds, approximately 18%).
+renderFigure({
+  sheetWidth: 1472,
+  sheets: [{
+    page: 4,
+    clip: [0, 327, 612, 623],
+    marks: [
+      'For example, if CES was handling a marketable order to buy shares, and the SIP NBO was $10.01, and the best offer from one or more of the depth of book feeds was $10.02, SmartProvide would send a buy order to be displayed in the market at a price less than $10.01, such as $10.00.',
+      'This order would be displayed for up to one to five seconds, depending on the size of the order.',
+      'This occurred for approximately 18% of the shares handled by SmartProvide.',
+    ],
+    boxes: [{ p: 'one to five seconds,' }, { p: 'approximately 18%' }],
+  }],
+  caption: [
+    '<b>¶ 12–13</b><span class="sep">·</span>page 4',
+    'SEC order 33-10280, January 13, 2017<span class="sep">·</span>sec.gov/litigation/admin/2017/33-10280.pdf',
+  ],
+});
+</script>
+</body>
+</html>

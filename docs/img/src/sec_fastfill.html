@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SEC order, paragraphs 10-11</title>
+<link rel="stylesheet" href="doc.css">
+<script src="pages/sec_words.js"></script>
+<script src="doc.js"></script>
+</head>
+<body>
+<div id="fig"></div>
+<script>
+// SEC order 33-10280, page 4, paragraphs 10-11: FastFill and its $10.01 vs $10.00 example.
+// The marker covers paragraph 11 word for word (footnote mark 6 included, it sits inside the line).
+renderFigure({
+  sheetWidth: 1472,
+  sheets: [{
+    page: 4,
+    clip: [0, 164, 612, 334],
+    marks: [
+      'For example, if CES was handling a marketable order to buy shares, and the SIP best offer was $10.01, and the best offer from one or more of the depth of book feeds was $10.00, FastFill immediately internalized the order using the SIP offer of $10.01 per share. FastFill did not internalize at or seek to obtain through routing the better $10.00 price from the depth of book feeds.',
+    ],
+    boxes: [{ p: '$10.01,', nth: 0 }, { p: '$10.00,', nth: 0 }],
+  }],
+  caption: [
+    '<b>¶ 10–11</b><span class="sep">·</span>page 4',
+    'SEC order 33-10280, January 13, 2017<span class="sep">·</span>sec.gov/litigation/admin/2017/33-10280.pdf',
+  ],
+});
+</script>
+</body>
+</html>

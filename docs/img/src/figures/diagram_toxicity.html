@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Toxicity analyzer</title>
+<link rel="stylesheet" href="figures.css">
+<style>
+  body { width: 900px; height: 640px; }
+  .body { position: absolute; top: 38px; left: 0; width: 900px; height: 602px; }
+  .abs { position: absolute; }
+  svg.wires { position: absolute; left: 0; top: 0; width: 900px; height: 602px; overflow: visible; }
+
+  .box { position: absolute; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; }
+  .box .k { font: 600 12.5px/16px "JBM", monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+  .box .t { margin-top: 6px; font: 650 21px/1.15 "Inter", sans-serif; color: var(--text); letter-spacing: -0.012em; white-space: nowrap; }
+  .box .d { margin-top: 7px; font: 400 13px/1.5 "JBM", monospace; color: var(--text-2); white-space: nowrap; }
+  .box .d i { font-style: normal; color: var(--muted); }
+
+  .in { left: 28px; width: 300px; }
+
+  .q {
+    position: absolute; left: 372px; top: 192px; width: 210px; height: 76px;
+    background: var(--hot); border-radius: 12px; color: var(--hot-ink);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .q .t { font: 750 23px/1.1 "Inter", sans-serif; letter-spacing: -0.015em; }
+  .q .k { margin-top: 6px; font: 500 12.5px "JBM", monospace; }
+
+  .out { left: 612px; width: 252px; }
+
+  .loop { left: 292px; top: 402px; width: 370px; border-style: dashed; border-color: var(--border); background: var(--bg); }
+  .loop .row { display: flex; justify-content: space-between; align-items: baseline; }
+
+  .note { position: absolute; font: 400 12.5px "JBM", monospace; color: var(--muted); white-space: nowrap; }
+
+  .quote-line { left: 28px; top: 524px; width: 844px; font-size: 18px; line-height: 1.4; }
+  .quote-line .cite { margin-left: 10px; }
+</style>
+</head>
+<body>
+<div class="win">
+  <div class="bar">
+    <div class="dots"><i></i><i></i><i></i></div>
+    <div class="title">toxicity analyzer</div>
+  </div>
+  <div class="body">
+    <svg class="wires" viewBox="0 0 900 602">
+      <defs>
+        <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#E6E8EA"/>
+        </marker>
+        <marker id="ahg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#8A9199"/>
+        </marker>
+      </defs>
+      <!-- the three kinds of parameters go into the quotient -->
+      <path d="M 329 111 C 352 111, 346 218, 368 218" stroke="#A3A9B0" stroke-width="2" fill="none"/>
+      <path d="M 329 230 L 368 230" stroke="#A3A9B0" stroke-width="2" fill="none" marker-end="url(#ah)"/>
+      <path d="M 329 333 C 352 333, 346 242, 368 242" stroke="#A3A9B0" stroke-width="2" fill="none"/>
+      <!-- the quotient decides -->
+      <path d="M 583 218 C 600 218, 590 153, 608 153" stroke="#E6E8EA" stroke-width="2.5" fill="none" marker-end="url(#ah)"/>
+      <path d="M 583 242 C 600 242, 590 309, 608 309" stroke="#E6E8EA" stroke-width="2.5" fill="none" marker-end="url(#ah)"/>
+      <!-- every executed trade's outcome comes back -->
+      <path d="M 865 153 L 880 153 L 880 451 L 668 451" stroke="#8A9199" stroke-width="2" stroke-dasharray="5 5" fill="none" marker-end="url(#ahg)"/>
+      <path d="M 477 400 L 477 274" stroke="#8A9199" stroke-width="2" stroke-dasharray="5 5" fill="none" marker-end="url(#ahg)"/>
+    </svg>
+
+    <div class="abs caps" style="left:28px; top:22px;">Toxicity analyzer · the patent's loop</div>
+    <div class="abs cite" style="right:28px; top:22px;">US 7,587,347 B2 · Griffin, Andresen · col. 9-14</div>
+
+    <div class="box in" style="top:66px;">
+      <div class="k">Order parameters</div>
+      <div class="d">symbol · buy/sell · order type<br>limit price · size</div>
+    </div>
+    <div class="box in" style="top:172px;">
+      <div class="k">Market conditions</div>
+      <div class="d">theoretical value<br>order frequency · liquidity<br>NBBO source, size, spread · beta</div>
+    </div>
+    <div class="box in" style="top:298px;">
+      <div class="k">Execution parameters</div>
+      <div class="d">fill spread · fill price</div>
+    </div>
+
+    <div class="note" style="left:477px; top:164px; transform:translateX(-50%);">combined empirically · col. 9</div>
+    <div class="q">
+      <div class="t">toxicity quotient</div>
+      <div class="k">scores each order</div>
+    </div>
+
+    <div class="box out" style="top:92px;">
+      <div class="k">Not likely toxic</div>
+      <div class="t">Execute it</div>
+      <div class="d">internalized, or sent<br>to the market <i>· col. 10-11</i></div>
+    </div>
+    <div class="box out" style="top:248px;">
+      <div class="k">Likely toxic</div>
+      <div class="t">Not executed</div>
+      <div class="d">or later, elsewhere, or<br>for a higher fee <i>· col. 11</i></div>
+    </div>
+
+    <div class="box loop">
+      <div class="row"><div class="k">Outcome of each trade</div><div class="cite" style="font-size:12.5px">col. 9, 14</div></div>
+      <div class="t" style="font-size:19px">a running tab of profit (or loss)</div>
+      <div class="d" style="margin-top:5px">correlated with the parameters</div>
+    </div>
+
+    <div class="abs quote quote-line">“some or all of the above and other order, market condition, and/or order execution parameters may be combined empirically to generate a ‘toxicity quotient’”<span class="cite">col. 9</span></div>
+  </div>
+</div>
+</body>
+</html>

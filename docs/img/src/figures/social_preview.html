@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>citadel-fastfill social preview</title>
+<link rel="stylesheet" href="figures.css">
+<style>
+  html, body { background: var(--bg); }
+  body { width: 1280px; height: 640px; position: relative; }
+  .bar { position: absolute; left: 0; right: 0; top: 0; }
+  .body { position: absolute; top: 38px; left: 0; right: 0; bottom: 0; }
+
+  .hook {
+    position: absolute; left: 76px; top: 66px; width: 660px;
+    font: 750 56px/1.08 "Inter", sans-serif; letter-spacing: -0.032em; color: #EEF0F2;
+  }
+  .hook .money { color: var(--hot); font-variant-numeric: tabular-nums; letter-spacing: -0.035em; }
+  .sub {
+    position: absolute; left: 76px; top: 286px; width: 560px;
+    font: 450 22px/1.45 "Inter", sans-serif; color: var(--text-2); text-wrap: balance;
+  }
+  .sub b { color: var(--text); font-weight: 560; }
+  .repo { position: absolute; left: 76px; bottom: 112px; font: 700 26px "JBM", monospace; letter-spacing: -0.02em; color: var(--text); }
+  .chips { position: absolute; left: 76px; bottom: 58px; display: flex; gap: 12px; }
+
+  /* the real document, cropped from the SEC order PDF */
+  .doc { position: absolute; background: #fff; box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.06); }
+  .doc img { display: block; width: 100%; height: auto; }
+  .p1 { left: 790px; top: 62px; width: 404px; border-radius: 4px; overflow: hidden; }
+  .pay { left: 742px; top: 300px; width: 470px; padding: 10px 12px 12px; border-radius: 4px; }
+  .pay .img { position: relative; }
+  .pay mark { position: absolute; background: rgba(255, 122, 26, 0.30); border-bottom: 2.5px solid var(--hot); }
+  .sum {
+    position: absolute; left: 742px; top: 412px; width: 470px;
+    font: 500 15px/1.5 "JBM", monospace; color: var(--text-2); letter-spacing: -0.01em;
+  }
+  .sum b { color: var(--text); font-weight: 700; }
+  .sum .cite { display: block; margin-top: 4px; font-size: 12.5px; }
+</style>
+</head>
+<body>
+  <div class="bar">
+    <div class="dots"><i></i><i></i><i></i></div>
+    <div class="title">~/<b>citadel-fastfill</b></div>
+  </div>
+  <div class="body">
+    <div class="hook">The two algorithms behind the SEC&#8217;s <span class="money">$22,665,268</span> order</div>
+    <div class="sub"><b>FastFill &amp; SmartProvide</b> of Citadel Securities, rebuilt rule by rule from the SEC&#8217;s order</div>
+
+    <div class="repo">citadel-fastfill</div>
+    <div class="chips">
+      <span class="chip"><svg viewBox="0 0 16 16" fill="none" stroke="#A3A9B0" stroke-width="1.3"><path d="M3.5 1.5h6l3 3v10h-9z"/><path d="M9.5 1.5v3h3M5.5 8h5M5.5 10.5h5M5.5 13h3"/></svg>SEC Release 33-10280</span>
+      <span class="chip"><svg viewBox="0 0 16 16" fill="none" stroke="#A3A9B0" stroke-width="1.3"><path d="M3.5 1.5h6l3 3v10h-9z"/><path d="M9.5 1.5v3h3M5.5 8h5M5.5 10.5h5M5.5 13h3"/></svg>US Patent 7,587,347 (Griffin et al.)</span>
+    </div>
+
+    <div class="doc p1"><img src="assets/sec_order_p1_caption.png" alt="SEC order 33-10280, page 1"></div>
+    <div class="doc pay">
+      <div class="img">
+        <img src="assets/sec_order_p11_payment.png" alt="SEC order 33-10280, page 11, Section V.B-C">
+        <!-- boxes from assets/sec_order_p11_amounts.json, padded a little -->
+        <mark style="left:0.8%; top:57.5%; width:12.0%; height:20.5%"></mark>
+        <mark style="left:36.8%; top:57.5%; width:12.1%; height:20.5%"></mark>
+        <mark style="left:77.9%; top:57.5%; width:13.3%; height:20.5%"></mark>
+      </div>
+    </div>
+    <div class="sum">$5,200,000 + $1,465,268 + $16,000,000 = <b>$22,665,268</b><span class="cite">disgorgement + interest + penalty · SEC order 33-10280, V.C</span></div>
+  </div>
+</body>
+</html>

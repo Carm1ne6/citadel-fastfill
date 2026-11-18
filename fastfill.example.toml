@@ -1,0 +1,140 @@
+# fastfill.example.toml: every parameter of citadel/params.py, with its default, what it does and where it comes from.
+#
+#   cp fastfill.example.toml my.toml                 then edit my.toml (lines left at their default change nothing)
+#   citadel-fastfill params --config my.toml         print the parameters a run would use
+#   citadel-fastfill replay --data data/run1 --config my.toml
+#   citadel-fastfill live --config my.toml
+#
+# Every value below is the default, so this file as it is changes nothing. The command line wins over the file:
+# --preset / --latency-ms / --round-lot / --venues first, then --set KEY=VALUE.
+#
+# Sources: "SEC 30" = paragraph 30 of the SEC order of January 13, 2017 (Release No. 33-10280), "SEC fn 13" = its
+# footnote 13; "PAT col. 9:1-5" = US 7,587,347 B2, column 9, lines 1-5. OURS = fixed by neither document, chosen by
+# this rebuild and printed with every run (RULES.md sections 8 and 9 give the reason for each choice).
+# The tables ([sip], [market], ...) are headings only: a parameter may sit under any of them, or at the top.
+
+[sip]
+# The slow view: "sip" = each venue's best round-lot quote, consolidated, published late; "latency" = the same top of
+# book including odd lots, only late (isolates SEC 22). Both are always printed side by side.
+# source: SEC 5, 19, 23 (round lots) + SEC 22 (latency); "sip" as the headline is OURS (RULES.md section 1)
+preset = "sip"
+# How late the SIP publishes a venue's quote, milliseconds.
+# source: SEC fn 9 (4.04 / 5.42 ms, NYSE / Nasdaq SIP, early 2010; 0.49 / 0.92 ms in early 2016)
+sip_latency_ms = 5.0
+# The smallest level the SIP counts as a quote (one round lot), BTC.
+# source: SEC 5 ("at least 100 shares"); the BTC size is OURS (0.0155 BTC = 100 shares at the order's $10.00 example)
+round_lot_btc = 0.05
+
+[market]
+# The venues whose books and trades are read; they stand for the exchanges.
+# source: SEC 4, 20 (several direct feeds, a subset of the exchanges); the four venues are OURS
+venues = ["coinbase", "kraken", "bitstamp", "gemini"]
+# Shift each venue onto the reference venue's prices by its slow price difference (EMA of past data only).
+# source: OURS (four crypto venues are not one Reg NMS market; RULES.md section 2)
+basis_adjust = true
+# The reference venue of the basis and of the crossed-quote rule.
+# source: OURS
+basis_ref = "coinbase"
+# Time constant of the basis EMA, seconds.
+# source: OURS
+basis_tau_s = 60.0
+# Drop another venue's levels that lock or cross the reference venue's best opposite quote, in both views.
+# source: SEC 23 ("how locked and crossed markets are resolved") and Reg NMS Rule 610(d); OURS (RULES.md section 2)
+clip_crossed = true
+# Book levels smaller than this are not quotes in either view, BTC (0 = off).
+# source: SEC 5 (odd lots: "quotations for less than 100 shares"), SEC 23 ("how odd lots are treated"); OURS: off (RULES.md section 2)
+min_level_btc = 0.0
+# Each venue's price grid in USD; a SmartProvide display is rounded onto its venue's grid.
+# source: the venues' price grids, checked on the recordings (NOTES.md)
+venue_ticks = { coinbase = 0.01, kraken = 0.1, bitstamp = 0.01, gemini = 0.01 }
+
+[orders]
+# A public taker order (its fills on one venue grouped) smaller than this is dust, not an order, BTC.
+# source: OURS (one share-equivalent = round_lot_btc / 100; SEC 1-2 for what an order is)
+min_order_btc = 0.0005
+# No order is handled in the first seconds of data, while the basis has less than one time constant.
+# source: OURS
+warmup_s = 60.0
+
+[internalization]
+# Price improvement on an internalized fill, USD per BTC (0.001 reproduces the order's $10.00 -> $9.999).
+# source: SEC 27, fn 11; the value is OURS (BTC books quote in whole cents)
+price_improvement_usd = 0.0
+# One cent: how far inside the SIP price SmartProvide displays before rounding onto the venue's grid, USD.
+# source: SEC 13 ("such as $10.00" under a $10.01 NBO), 37 ("at least one penny"); the one cent is OURS (RULES.md section 4); Coinbase's price grid (NOTES.md)
+tick_usd = 0.01
+
+[fastfill]
+# The depth-of-book feeds FastFill compares with the SIP.
+# source: SEC 10, 20, 29 ("one or more of the depth of book feeds that FastFill referenced"); all four is OURS
+fastfill_feeds = ["coinbase", "kraken", "bitstamp", "gemini"]
+# A trade out is allowed only if it is at most this share of the size at the best price (fn 13); measuring that
+# size on the single venue with the most size is OURS.
+# source: SEC fn 13 ("no greater than 90% of the quantity associated with the best bid or offer")
+trade_out_cap = 0.9
+# A trade out reaches its venue this long after it is sent and is read on that venue's next book message, ms.
+# source: OURS (fn 13 gives the result, about 55% filled, not the delay; sensitivity 5 / 50 / 250 ms)
+trade_out_latency_ms = 50.0
+# Inventory limit above which FastFill sends a trade out, BTC (0 = off).
+# source: SEC 31 names a position limit; its value is not public, OURS: off
+position_limit_btc = 0.0
+
+[smartprovide]
+# The feeds SmartProvide compares with the SIP; it often referenced only one.
+# source: SEC 12, 34-35; the feed is OURS (Coinbase, as SPEC.md; Kraken's $0.10 grid is a sensitivity row)
+smartprovide_feeds = ["coinbase"]
+# The venue where SmartProvide displays its order.
+# source: OURS (the venue whose feed SmartProvide reads)
+sp_post_venue = "coinbase"
+# Shortest display window, seconds.
+# source: SEC 13, 38 ("displayed for up to one to five seconds")
+sp_display_min_s = 1.0
+# Longest display window, seconds.
+# source: SEC 13, 38
+sp_display_max_s = 5.0
+# Orders of this size or smaller are displayed for sp_display_min_s, BTC.
+# source: OURS (the size scale of SEC 13, 38 and its direction)
+sp_small_btc = 0.1
+# Orders of this size or larger are displayed for sp_display_max_s, linear in between, BTC.
+# source: OURS (the size scale of SEC 13, 38 and its direction)
+sp_large_btc = 1.0
+# At window end without a principal interest: "route" = take the displayed liquidity (riskless principal),
+# "internalize" = internalize at the SIP price like the orders with a principal interest.
+# source: SEC 39 (the three options) + SEC fn 12 (no principal interest: riskless principal); the choice is OURS
+sp_reeval_no_pi = "route"
+
+[toxicity]
+# A fill's outcome (profit, or no profit or a loss) is read this many seconds after it.
+# source: OURS (PAT col. 9:57-67 correlates parameters with "the outcome of trades", no horizon; 1 and 30 s tested)
+tox_horizon_s = 5.0
+# Principal interest when the toxicity quotient is below this (the order is not likely toxic).
+# source: OURS, bounded by PAT col. 9:1-5 and SEC 31 ("a narrow set of circumstances"); grid 0.5-0.9 in the report
+tox_threshold = 0.7
+# The analyzer is refitted on the outcomes already known this often, seconds.
+# source: OURS (PAT col. 10:13-16: quotients "may be dynamically modified")
+tox_refit_s = 30.0
+# Outcomes needed before the analyzer screens anything (until then every order has a principal interest).
+# source: OURS
+tox_min_train = 300
+# L2 penalty of the logistic fit that combines the parameters into the quotient.
+# source: OURS (PAT col. 9:57-67 asks for an empirical combination; the model form is ours)
+tox_ridge = 1.0
+
+[profit]
+# A dealer fill is marked at the direct-feed mid this many seconds after it.
+# source: OURS (PAT col. 13:60-62: profit "can only be determined after a trade has been executed")
+profit_mark_s = 5.0
+# Length of one period of an order flow's expected level of profit, seconds.
+# source: OURS (PAT col. 14:5-7: "various periods of time (days, weeks, or months)")
+profit_period_s = 60.0
+# A period this many standard errors below the expected level signals corrective action.
+# source: OURS (PAT col. 14:8-11: "Deviations from these averages ... signal the need to take corrective action")
+profit_signal_z = 2.0
+# Trades of an order flow before its expected level is used.
+# source: OURS
+profit_min_trades = 20
+
+[numerics]
+# Tolerance of every price comparison.
+# source: numerical tolerance, not a model choice
+eps = 1e-9
